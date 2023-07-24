@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ComicBookGallery.Data;
 
+
 namespace ComicBookGallery.Controllers
 {
     public class SeriesController : Controller
@@ -18,6 +19,18 @@ namespace ComicBookGallery.Controllers
         public ActionResult Index()
         {
             var series = _seriesRepository.GetSeries();
+
+            return View(series);
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var series = _seriesRepository.GetSeriesDetail((int)id);
 
             return View(series);
         }
